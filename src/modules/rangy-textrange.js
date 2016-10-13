@@ -629,6 +629,14 @@ rangy.createModule("TextRange", ["WrappedSelection"], function(api, module) {
                     return true;
                 }
             }
+
+            // Ensure that a block element containing a <svg> is considered to have inner text
+            // as otherwise it will crash IE11
+            var svgs = el.getElementsByTagName("svg");
+            if (svgs.length) {
+                return true;
+            }
+
             return this.hasInnerText();
         }, "node"),
 
